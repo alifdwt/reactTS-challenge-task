@@ -51,6 +51,13 @@ const tasks: tasksObj[] = [
     language: "TypeScript, Javascript",
     link: "/currency",
   },
+  {
+    id: 8,
+    title: "Degree Converter",
+    level: "Hard",
+    language: "TypeScript, Javascript",
+    link: "/degree",
+  },
 ];
 
 const TaskList = () => {

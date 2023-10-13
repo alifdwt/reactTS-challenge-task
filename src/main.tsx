@@ -10,6 +10,7 @@ import Salary from "./pages/Salary.tsx";
 import WordScramble from "./pages/WordScramble.tsx";
 import TicTacToe from "./pages/TicTacToe.tsx";
 import CurrencyConverter from "./pages/CurrencyConverter.tsx";
+import DegreeConverter from "./pages/DegreeConverter.tsx";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: "/currency",
     element: <CurrencyConverter />,
+  },
+  {
+    path: "/degree",
+    element: <DegreeConverter />,
   },
 ]);
 

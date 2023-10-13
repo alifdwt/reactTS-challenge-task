@@ -1,5 +1,3 @@
-// src/components/CurrencyConverter.tsx
-
 import React, { useState } from "react";
 
 const CurrencyConverter: React.FC = () => {
@@ -15,6 +13,14 @@ const CurrencyConverter: React.FC = () => {
     EUR: 0.94,
     AUD: 1.56,
     MYR: 4.72,
+  };
+  const localeString: Record<string, string> = {
+    USD: "en-US",
+    IDR: "id-ID",
+    JPY: "ja-JP",
+    EUR: "sfb",
+    AUD: "en-AU",
+    MYR: "ms-MY",
   };
 
   const convertCurrency = () => {
@@ -63,16 +69,32 @@ const CurrencyConverter: React.FC = () => {
         </select>
       </div>
       <button
-        className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+        className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 w-full"
         onClick={convertCurrency}
       >
         Convert
       </button>
       {convertedAmount !== null && (
-        <p className="mt-4">
-          {amount} {fromCurrency} is equal to {convertedAmount.toFixed(2)}{" "}
-          {toCurrency}
-        </p>
+        <div className="flex justify-around">
+          <div className="mt-4 flex flex-col">
+            <label className="mr-2 text-center">Origin</label>
+            <span className="font-bold text-2xl">
+              {amount.toLocaleString(localeString[fromCurrency], {
+                style: "currency",
+                currency: fromCurrency,
+              })}
+            </span>
+          </div>
+          <div className="mt-4 flex flex-col">
+            <label className="mr-2 text-center">Result</label>
+            <span className="font-bold text-2xl">
+              {convertedAmount.toLocaleString(localeString[toCurrency], {
+                style: "currency",
+                currency: toCurrency,
+              })}
+            </span>
+          </div>
+        </div>
       )}
     </div>
   );
