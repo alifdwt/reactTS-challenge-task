@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 const words = ["react", "typescript", "javascript", "programming", "developer"];
 
@@ -11,10 +11,10 @@ const WordScramble: React.FC = () => {
   const [showNextWordButton, setShowNextWordButton] = useState(false);
   console.log(showNextWordButton);
 
-  const getRandomWord = () => {
+  const getRandomWord = useCallback(() => {
     const randomIndex = Math.floor(Math.random() * words.length);
     return words[randomIndex];
-  };
+  }, []);
 
   const scrambleWord = (word: string) => {
     const wordArray = word.split("");
@@ -25,14 +25,21 @@ const WordScramble: React.FC = () => {
     return wordArray.join("");
   };
 
-  const startNewGame = () => {
+  const startNewGame = useCallback(() => {
     const newWord = getRandomWord();
     setCurrentWord(newWord);
     setScrambledWord(scrambleWord(newWord));
     setIsCorrect(null);
     setUserAnswer("");
     setShowNextWordButton(false);
-  };
+  }, [
+    getRandomWord,
+    setCurrentWord,
+    setScrambledWord,
+    setIsCorrect,
+    setUserAnswer,
+    setShowNextWordButton,
+  ]);
 
   const checkAnswer = () => {
     if (userAnswer === currentWord) {
@@ -46,7 +53,7 @@ const WordScramble: React.FC = () => {
 
   useEffect(() => {
     startNewGame();
-  }, []);
+  }, [startNewGame]);
 
   return (
     <div className="max-w-md mx-auto mt-8 p-4 bg-white rounded-lg shadow-md">
